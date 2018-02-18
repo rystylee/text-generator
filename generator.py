@@ -11,7 +11,6 @@ class Generator(object):
         count = 0
         while count < max_words:
             if count == 0:
-                # The beginning of a sentence
                 sentence = random.choice(self._dictionary.line_list)
                 key = sentence[0] + sentence[1]
                 text = key
@@ -35,4 +34,4 @@ class Generator(object):
 if __name__ == '__main__':
     generator = Generator('source.txt')
     text = generator.generate_text(50)
-    print('text :', text)
+    print(text)

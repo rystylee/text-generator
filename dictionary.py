@@ -4,7 +4,7 @@ import MeCab
 class Dictionary(object):
     def __init__(self, source_file):
         self._dict = {}
-        self.line_list = []
+        self._line_list = []
         self._num_prefix = 2
         self.create_markov_dict(source_file)
 
@@ -27,14 +27,13 @@ class Dictionary(object):
                     tokenized_text_list.append('。')
                 if not tokenized_text_list == []:  # Except blank line
                     line_list.append(tokenized_text_list)
-        self.line_list = line_list
-        return line_list
+        self._line_list = line_list
 
     def create_markov_dict(self, file_path):
         # dictionary format : {'prefix', 'suffix'}
-        line_list = self.create_line_list(file_path)
+        self.create_line_list(file_path)
         markov_dict = {}
-        for line in line_list:
+        for line in self._line_list:
             for i, word in enumerate(line):
                 if i + self._num_prefix < len(line):
                     prefix = ''
@@ -47,3 +46,7 @@ class Dictionary(object):
     @property
     def dict(self):
         return self._dict
+
+    @property
+    def line_list(self):
+        return self._line_list
